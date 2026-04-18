@@ -1,72 +1,74 @@
 # Copy YouTube Transcript
 
-Browser-Erweiterung (Chrome, Manifest V3), die **Untertitel/Transkripte von YouTube-Videos** direkt aus dem Player heraus in die Zwischenablage kopiert — optional mit Zeitstempeln und als **Klartext** oder **Markdown**.
+A **Chrome** (Manifest V3) browser extension that copies **YouTube video captions/transcripts** to the clipboard from the watch page — optionally with timestamps, as **plain text** or **Markdown**.
 
-## Funktionen
+Licensed under the [MIT License](LICENSE).
 
-- **„Copy transcript“-Button** in der Aktionsleiste unter dem Video (neben Teilen, Speichern usw.), sobald ein Transkript verfügbar ist
-- **Kein separates Öffnen** des YouTube-Transkript-Panels nötig; das Transkript wird im Hintergrund geladen und bei Klick kopiert
-- **Einstellungen** über das Erweiterungs-Popup:
-  - **Ausgabe:** Plain Text oder Markdown (Aufzählungslisten mit `-`)
-  - **Zeitstempel:** ein- oder ausschaltbar (`[mm:ss]` bzw. `[hh:mm:ss]` bei langen Videos)
-- Einstellungen werden über `chrome.storage.sync` gespeichert (bei angemeldetem Chrome-Konto geräteübergreifend nutzbar)
-- Wenn **kein Untertitel/Transkript** existiert, zeigt der Button einen deaktivierten Zustand („No transcript“)
+## Features
 
-## Voraussetzungen
+- **“Copy transcript” button** in the action bar below the video (next to Share, Save, etc.) when a transcript is available
+- **No need to open** YouTube’s transcript panel separately; captions are loaded in the background and copied on click
+- **Settings** in the extension popup:
+  - **Output:** Plain text or Markdown (bullet lists with `-`)
+  - **Timestamps:** optional (`[mm:ss]` or `[hh:mm:ss]` for long videos)
+- Settings are stored with `chrome.storage.sync` (synced across devices when signed into Chrome)
+- If **no captions/transcript** exists, the button shows a disabled state (“No transcript”)
 
-- **Chromium-basierter Browser** mit Unterstützung für Manifest V3 (z. B. Google Chrome, Microsoft Edge, Brave)
-- Nutzung auf **youtube.com** (die Erweiterung ist nur dort aktiv)
+## Requirements
 
-## Installation aus dem Quellcode (Entwickler-Modus)
+- A **Chromium-based browser** with Manifest V3 support (e.g. Google Chrome, Microsoft Edge, Brave)
+- Used on **youtube.com** only (the extension is active there)
 
-1. Repository klonen oder als ZIP herunterladen und entpacken.
-2. Im Browser **Erweiterungen verwalten** öffnen:
+## Install from source (developer mode)
+
+1. Clone the repository or download and unpack the ZIP.
+2. Open **Manage extensions** in your browser:
    - Chrome: `chrome://extensions`
    - Edge: `edge://extensions`
-3. **Entwicklermodus** aktivieren.
-4. **Entpackte Erweiterung laden** wählen und den Ordner auswählen, der die `manifest.json` enthält (Projektroot).
+3. Enable **Developer mode**.
+4. Click **Load unpacked** and select the folder that contains `manifest.json` (project root).
 
-Nach der Installation auf einer YouTube-Watch-Seite (`youtube.com/watch?v=…`) erscheint der Button, sobald die Seite geladen ist.
+After installation, on a YouTube watch page (`youtube.com/watch?v=…`), the button appears once the page has loaded.
 
-## Bedienung
+## Usage
 
-1. Video mit verfügbaren Untertiteln öffnen (automatisch erzeugte oder manuelle Untertitel zählen mit).
-2. Auf **Copy transcript** klicken — der Text landet in der Zwischenablage.
-3. Format und Zeitstempel bei Bedarf im **Popup** der Erweiterung (Klick auf das Erweiterungssymbol) anpassen.
+1. Open a video that has captions (auto-generated or manual).
+2. Click **Copy transcript** — the text is copied to the clipboard.
+3. Adjust format and timestamps in the extension **popup** (click the extension icon) if needed.
 
-## Berechtigungen (kurz erklärt)
+## Permissions
 
-| Berechtigung        | Zweck |
-|---------------------|--------|
-| `storage`           | Speichern der Popup-Einstellungen (Format, Zeitstempel). |
-| `clipboardWrite`  | Transkript in die Zwischenablage schreiben (über den Hintergrund-Service-Worker). |
-| `*://*.youtube.com/*` (Host) | Skripte und Netzwerkzugriffe nur auf YouTube-Domains für Captions und die InnerTube-API. |
+| Permission | Purpose |
+|------------|---------|
+| `storage` | Save popup settings (format, timestamps). |
+| `clipboardWrite` | Write the transcript to the clipboard (via the background service worker). |
+| `*://*.youtube.com/*` (host) | Scripts and network access only on YouTube domains for captions and the InnerTube API. |
 
-Es werden keine Daten an Drittanbieter-Server der Erweiterung gesendet; Anfragen laufen im Kontext von YouTube (Cookies/Session wie im Browser).
+No data is sent to third-party servers operated by this extension; requests run in the YouTube context (cookies/session as in the browser).
 
-## Technischer Überblick
+## Technical overview
 
-- **`manifest.json`** — Manifest V3, Content Script, Service Worker, Popup
-- **`content.js`** — UI-Button, Abruf der Player-/Caption-Metadaten, Fetch der Untertitel (u. a. timedtext / json3), Formatierung
-- **`content.css`** — Styling des Buttons
-- **`background.js`** — Service Worker für `navigator.clipboard.writeText`
-- **`popup.html` / `popup.js`** — Einstellungen
+- **`manifest.json`** — Manifest V3, content script, service worker, popup
+- **`content.js`** — UI button, player/caption metadata, fetching captions (e.g. timedtext / json3), formatting
+- **`content.css`** — Button styling
+- **`background.js`** — Service worker for `navigator.clipboard.writeText`
+- **`popup.html` / `popup.js`** — Settings
 
-Kein Build-Step: reines HTML/CSS/JS, direkt ladbar.
+No build step: plain HTML/CSS/JS, load directly.
 
-## Beiträge & Fehler
+## Contributing & issues
 
-Issues und Pull Requests sind willkommen. Bitte bei Bugs möglichst angeben:
+Issues and pull requests are welcome. For bugs, please include when possible:
 
-- Browser und Version  
-- Link oder Video-ID  
-- ob Untertitel in der YouTube-Oberfläche sichtbar sind  
-- erwartetes vs. tatsächliches Verhalten  
+- Browser and version  
+- Link or video ID  
+- Whether captions are visible in the YouTube UI  
+- Expected vs. actual behavior  
 
-## Lizenz
+## License
 
-Dieses Projekt ist Open Source. Wenn noch keine `LICENSE`-Datei im Repository liegt, solltest du eine freie Lizenz deiner Wahl hinzufügen (häufig: **MIT**), damit andere Nutzungsbedingungen klar sind.
+Distributed under the MIT License. See [LICENSE](LICENSE).
 
 ---
 
-*Hinweis: YouTube ist eine Marke von Google. Dieses Projekt ist nicht von Google betrieben oder offiziell unterstützt.*
+*YouTube is a trademark of Google LLC. This project is not affiliated with or endorsed by Google.*
