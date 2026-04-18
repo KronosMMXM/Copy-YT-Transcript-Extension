@@ -4,6 +4,16 @@ A **Chrome** (Manifest V3) browser extension that copies **YouTube video caption
 
 Licensed under the [MIT License](LICENSE).
 
+## Screenshots
+
+**YouTube watch page** — the extension adds **Copy transcript** next to Share, Save, and other actions.
+
+![YouTube action bar with Copy transcript button](assets/readme-youtube-action-bar.png)
+
+**Extension popup** — choose **Plain text** or **Markdown**, and toggle **Include timestamps**.
+
+![Copy Transcript popup: output format and timestamp option](assets/readme-extension-popup.png)
+
 ## Features
 
 - **“Copy transcript” button** in the action bar below the video (next to Share, Save, etc.) when a transcript is available
