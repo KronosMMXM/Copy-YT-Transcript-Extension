@@ -1,2 +1,5 @@
 .DS_Store
 Thumbs.db
+
+# Cursor IDE (local agents, not for the repo)
+.cursor/
