@@ -1,0 +1,119 @@
+/*
+ * Wrapper must not be a separate flex “shell” with its own margins.
+ * display:contents lets the inner <button> be the flex item, so the row’s gap is
+ * the only horizontal spacing — same as native ytd-button-renderer children.
+ */
+.yt-ct-wrap {
+  display: contents;
+}
+
+/*
+ * Button classes are copied from the Share pill (yt-spec-button-shape-next…).
+ */
+button.yt-ct-yt-spec {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  /* Native ytd-button-renderer pills often rely on margin-inline-start when the row’s
+     effective column-gap is 0; a flat <button> flex item had margin: 0 and sat flush
+     against Share. Match the usual pill-to-pill inset (Material ~8px). */
+  margin-block: 0 !important;
+  margin-inline-end: 0 !important;
+  margin-inline-start: 8px !important;
+  align-self: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.yt-ct-yt-spec .yt-spec-button-shape-next__icon .yt-ct-icon {
+  display: block;
+}
+
+.yt-ct-icon-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.yt-ct-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+.yt-ct-label.yt-spec-button-shape-next__button-text-content {
+  max-width: 200px;
+}
+
+.yt-ct-label:not(.yt-spec-button-shape-next__button-text-content) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+}
+
+button.yt-ct-yt-spec.yt-ct--busy {
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+button.yt-ct-yt-spec.yt-ct--disabled,
+button.yt-ct-yt-spec.yt-ct--disabled:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button.yt-ct-yt-spec.yt-ct--copied:not(:disabled) {
+  color: var(--yt-spec-call-to-action, #3ea6ff);
+}
+
+button.yt-ct-btn:not(.yt-ct-yt-spec) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px 0 10px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  font-family: "Roboto", "YouTube Noto", Arial, sans-serif;
+  color: var(--yt-spec-text-primary, #0f0f0f);
+  background-color: var(
+    --yt-spec-badge-chip-background,
+    var(--yt-spec-10-percent-layer, rgba(128, 128, 128, 0.22))
+  );
+  transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button.yt-ct-btn:not(.yt-ct-yt-spec):hover:not(:disabled) {
+  background-color: var(
+    --yt-spec-10-percent-layer,
+    rgba(128, 128, 128, 0.3)
+  );
+}
+
+button.yt-ct-btn:not(.yt-ct-yt-spec):active:not(:disabled) {
+  background-color: var(
+    --yt-spec-20-percent-layer,
+    rgba(128, 128, 128, 0.38)
+  );
+}
+
+button.yt-ct-btn:not(.yt-ct-yt-spec):focus-visible {
+  outline: 2px solid var(--yt-spec-call-to-action, #065fd4);
+  outline-offset: 2px;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Copy Transcript</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --border: rgba(128, 128, 128, 0.35);
+        --bg: Canvas;
+        --fg: CanvasText;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 14px 16px;
+        min-width: 240px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        font-size: 13px;
+        color: var(--fg);
+        background: var(--bg);
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      fieldset {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin: 0 0 12px;
+        padding: 10px 12px;
+      }
+      legend {
+        padding: 0 4px;
+        font-weight: 500;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .row:last-child {
+        margin-bottom: 0;
+      }
+      label {
+        cursor: pointer;
+        user-select: none;
+      }
+      select {
+        flex: 1;
+        min-width: 0;
+        padding: 6px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: Field;
+        color: FieldText;
+        font: inherit;
+      }
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #065fd4;
+      }
+      .status {
+        font-size: 12px;
+        opacity: 0.75;
+        min-height: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Copy Transcript</h1>
+    <fieldset>
+      <legend>Format</legend>
+      <div class="row">
+        <label for="format">Output</label>
+        <select id="format" aria-label="Output format">
+          <option value="plain">Plain Text</option>
+          <option value="markdown">Markdown</option>
+        </select>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Options</legend>
+      <div class="row">
+        <input type="checkbox" id="includeTimestamps" />
+        <label for="includeTimestamps">Include timestamps</label>
+      </div>
+    </fieldset>
+    <p class="status" id="status" role="status"></p>
+    <script src="popup.js"></script>
+  </body>
+</html>
